@@ -1,0 +1,35 @@
+{
+  "name": "youtube-downloader",
+
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {}
+  },
+  "shutdownAction": "stopContainer",
+
+  "settings": {
+    "git.path": "/usr/bin/git",
+    "editor.formatOnSave": true,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "extensions": [
+    "CoenraadS.bracket-pair-colorizer",
+    "ExodiusStudios.comment-anchors",
+    "mikestead.dotenv",
+    "EditorConfig.EditorConfig",
+    "usernamehw.errorlens",
+    "eamodio.gitlens",
+    "oderwat.indent-rainbow",
+    "ms-vscode.vscode-typescript-next",
+    "christian-kohler.path-intellisense",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "rangav.vscode-thunder-client"
+  ],
+
+  "forwardPorts": [3000],
+  "postCreateCommand": "yarn"
+}

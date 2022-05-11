@@ -1,0 +1,27 @@
+{
+  "name": "youtube-downloader",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn lint && node ./esbuild.config.js",
+    "dev": "nodemon -e ts -x 'yarn build && clear && node ./dist/index.js' -i 'node_modules'",
+    "start:dev": "yarn lint && yarn build && clear && node ./dist/index.js",
+    "lint": "eslint . --ext .ts"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.32",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "esbuild": "^0.14.38",
+    "esbuild-node-externals": "^1.4.1",
+    "eslint": "^8.15.0",
+    "nodemon": "^2.0.16",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
+}
