@@ -1,20 +1,20 @@
 export class Console {
-  static devError(message: string) {
+  static devError(message: unknown) {
     if (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'development') console.error(message);
   }
-  static devInfo(message: string) {
+  static devInfo(message: unknown) {
     if (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'development') console.info(message);
   }
-  static devLog(message: string) {
+  static devLog(message: unknown) {
     if (process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() === 'development') console.log(message);
   }
-  static error(message: string) {
+  static error(message: unknown) {
     console.error(message);
   }
-  static info(message: string) {
+  static info(message: unknown) {
     console.info(message);
   }
-  static log(message: string) {
+  static log(message: unknown) {
     console.log(message);
   }
 }
