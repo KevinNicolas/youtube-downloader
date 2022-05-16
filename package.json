@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rm -r dist || yarn lint && node ./esbuild.config.js",
-    "dev": "nodemon -e ts -x 'yarn build && clear && node ./dist/bundle.js' -i 'node_modules'",
-    "lint": "eslint . --ext .ts"
+    "build": "rm -r dist || npm run lint && node ./esbuild.config.js",
+    "dev": "nodemon -e ts -x 'npm run build && clear && node ./dist/bundle.js' -i 'node_modules'",
+    "lint": "eslint . --ext .ts",
+    "start": "npm run build && node ./dist/bundle.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
