@@ -2,12 +2,16 @@ import { Request, Response } from 'express';
 import { DownloadRequestBody } from '@interfaces';
 import { DownloaderService } from '@services';
 import { resolve } from 'path';
+import { formatVideoId } from '@utils';
 
 export const DownloadController = async (req: Request, res: Response) => {
-  if (!req.body.downloadLink) res.status(400).send({ error: 'Missing downloadLink' });
-  if (!req.body.fileType) res.status(400).send({ error: 'Missing fileType' });
+  if (!req.body.downloadLink) return res.status(400).send({ error: 'Missing downloadLink' });
+  if (!req.body.fileType) return res.status(400).send({ error: 'Missing fileType' });
 
   const { downloadLink, options, fileType }: DownloadRequestBody = req.body;
+
+  const parsedDownloadLink: string = formatVideoId(downloadLink);
+  if (parsedDownloadLink === '') return res.status(400).send({ error: 'Invalid downloadLink, missing queryParam "v"' });
 
   if (fileType === 'video') {
     options.type = 'videoandaudio';
@@ -22,7 +26,7 @@ export const DownloadController = async (req: Request, res: Response) => {
     options.format = 'webm';
   }
 
-  const { stream } = await DownloaderService.downloadVideo(downloadLink, options);
+  const { stream } = await DownloaderService.downloadVideo(parsedDownloadLink, options);
 
   stream?.on('data', (data: unknown) => res.write(data));
   stream?.on('end', () => res.end());
