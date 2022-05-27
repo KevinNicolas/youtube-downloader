@@ -25,12 +25,14 @@ export class DownloaderService implements IDownloaderService {
   downloadVideo(link: string, options: DownloadOptions = { saveVideo: false }): Promise<Stream> {
     return new Promise(async (resolve, reject) => {
       try {
+        const { saveVideo, format, quality, type, videoStorePath } = options
+        console.info(format, quality, type)
         const downloader = await new Youtubei();
 
-        const stream = downloader.download(link);
+        const stream = downloader.download(link, { format, quality, type });
 
-        if (options.saveVideo) options.videoStorePath
-          ? await this._saveVideo(options.videoStorePath, stream)
+        if (saveVideo) videoStorePath
+          ? await this._saveVideo(videoStorePath, stream)
           : console.warn('[DOWNLOADER-SERVICE]', 'Can not download, "videoStorePath" is not defined')
 
         resolve(stream);
