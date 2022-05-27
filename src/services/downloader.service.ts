@@ -3,23 +3,13 @@ import Youtubei from 'youtubei.js';
 import { Console } from '@utils';
 import { VideoDetails, IDownloaderService, DownloadOptions } from '@definitions';
 import { createWriteStream } from 'fs'
+import { PlaylistDetail } from 'definitions/playlist-detail';
 export class DownloaderService implements IDownloaderService {
   private async _saveVideo(videoStorePathWithName: string, stream: Stream): Promise<void> {
     return new Promise((resolve) => {
       stream.pipe(createWriteStream(videoStorePathWithName))
       stream.on('end', () => resolve())
     })
-  }
-
-  getPlaylistDetail(link: string) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const downloader = await new Youtubei();
-        resolve(await downloader.getPlaylist(link));
-      } catch (e: unknown) {
-        reject(e);
-      }
-    });
   }
 
   downloadVideo(link: string, options: DownloadOptions = { saveVideo: false }): Promise<Stream> {
@@ -43,6 +33,12 @@ export class DownloaderService implements IDownloaderService {
       }
     });
   }
+
+  // TODO - Type function
+  async getPlaylistDetail(link: string): Promise<PlaylistDetail> {
+    const downloader = await new Youtubei();
+    return await downloader.getPlaylist(link) as any;
+  };
 
   async getVideoDetail(link: string): Promise<VideoDetails> {
     const downloader = await new Youtubei();
