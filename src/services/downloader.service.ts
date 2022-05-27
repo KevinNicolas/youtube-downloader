@@ -38,7 +38,7 @@ export class DownloaderService implements IDownloaderService {
   async getPlaylistDetail(link: string): Promise<PlaylistDetail> {
     const downloader = await new Youtubei();
     return await downloader.getPlaylist(link) as any;
-  };
+  }
 
   async getVideoDetail(link: string): Promise<VideoDetails> {
     const downloader = await new Youtubei();
